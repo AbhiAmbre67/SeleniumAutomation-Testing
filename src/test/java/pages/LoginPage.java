@@ -12,14 +12,30 @@ public class LoginPage
         this.driver = driver ;
     }
 
-    By username= By.id("user-name");
-    By password = By.id("password");
-    By loginBtn =By.id("login-button");
+    private By username= By.id("user-name");
+    private By password = By.id("password");
+    private  By loginBtn =By.id("login-button");
+    private By errorMessage = By.cssSelector("[data-test='error']");
 
-    public void login(String user, String pass)
+    public  void login(String user, String pass)
     {
+        driver.findElement(username).clear();
         driver.findElement(username).sendKeys(user);
+
+        driver.findElement(password).clear();
         driver.findElement(password).sendKeys(pass);
+
         driver.findElement(loginBtn).click();
+    }
+
+    public String getErrorMessage()
+    {
+        return driver.findElement(
+                errorMessage).getText();
+    }
+
+    public String GetCurentUrl()
+    {
+        return driver.getCurrentUrl();
     }
 }
